@@ -22,7 +22,11 @@
         self.categories = [categoryNames componentsJoinedByString:@", "];
         self.name = dictionary[@"name"];
         self.imageUrl = dictionary[@"image_url"];
-        NSString *street = [dictionary valueForKeyPath:@"location.address"][0];
+        NSArray *streetArr = [dictionary valueForKeyPath:@"location.address"];
+        NSString *street = nil;
+        if (streetArr.count > 0) {
+            street = streetArr[0];
+        }
         NSString *neighborhood = [dictionary valueForKeyPath:@"location.neighborhoods"][0];
         self.address = [NSString stringWithFormat:@"%@, %@", street, neighborhood];
         
